@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/px_10"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/px_36"
+        tools:text="蓝牙名称"
+        android:padding="@dimen/px_10"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/px_30"
+        tools:text="蓝牙地址"
+        android:padding="@dimen/px_10"
+        android:textColor="#464545"/>
+
+    <TextView
+        android:id="@+id/tvRssi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="信号强度"
+        android:textSize="@dimen/px_24"
+        android:padding="@dimen/px_10"
+        android:textColor="#696868"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnConnect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="连接"/>
+
+        <Button
+            android:id="@+id/btnDisConnect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="断开连接"/>
+
+        <Button
+            android:id="@+id/btnSent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="操作"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

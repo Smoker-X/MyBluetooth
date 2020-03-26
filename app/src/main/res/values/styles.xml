@@ -1,0 +1,78 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <!--自定义dialog(基类)背景不透明无边框theme -->
+    <style name="BaseDialogStyle" parent="Animation.AppCompat.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@drawable/base_dialog_bg</item>
+        <!--是否有遮盖-->
+        <item name="android:windowContentOverlay">@null</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+
+        <item name="android:windowSoftInputMode">adjustPan</item>
+        <!--dialog进入退出动画-->
+        <!--<item name="android:windowAnimationStyle">@style/pop_and_dialog_anim_style</item>-->
+    </style>
+
+
+    <!--自定义dialog(基类)背景不透明无边框theme -->
+    <style name="BaseDialogNoBgStyle" parent="Animation.AppCompat.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@drawable/bg_transparent</item>
+        <!--是否有遮盖-->
+        <item name="android:windowContentOverlay">@null</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
+
+
+    <!-- pop 进入退出动画-->
+    <style name="pop_and_dialog_anim_style">
+        <item name="android:windowEnterAnimation">@anim/pop_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit</item>
+    </style>
+
+
+    <!-- pop 左进左出-->
+    <style name="pop_and_dialog_anim_style_left_entry_exit">
+        <item name="android:windowEnterAnimation">@anim/pop_left_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_left_exit</item>
+    </style>
+
+
+    <!-- pop 右进右出-->
+    <style name="pop_and_dialog_anim_style_right_entry_exit">
+        <item name="android:windowEnterAnimation">@anim/pop_right_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_right_exit</item>
+    </style>
+
+
+    <!--主标题-->
+    <style name="toolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/px_40</item>
+    </style>
+
+</resources>

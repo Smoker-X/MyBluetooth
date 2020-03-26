@@ -1,0 +1,131 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'org.greenrobot.greendao'
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+/*Android bluetooth 5.0 最小兼容 api21，即Android 5.0系统及以上*/
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "somker.pro.com.mybluetooth"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+        multiDexEnabled true
+    }
+    signingConfigs {
+        release {
+            storeFile file("../app/borikeji.keystore")
+            storePassword "borikeji"
+            keyAlias "borikeji"
+            keyPassword "borikeji"
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            versionNameSuffix '.debug'
+        }
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    productFlavors {
+        BluetoothDebug {
+            applicationId "somker.pro.com.mybluetooth.debug"
+            manifestPlaceholders = [app_label: "MyBluetooth", icon: "@mipmap/app_logo"]
+        }
+
+    }
+
+
+    def count = 0
+    def createapkPropsFile = file('createapk.properties')
+    Properties createProps = new Properties()
+    if (createapkPropsFile.canRead()) {
+        //createapk.properties
+        createProps.load(new FileInputStream(createapkPropsFile))
+        //createapk.properties根据关键字"CREATE_COUNT"取Integer
+        count = createProps['CREATE_COUNT'].toInteger()
+        createProps['CREATE_COUNT'] = (++count).toString()
+    }
+    def appName = 'MyBluetooth'
+    //判断build模式，如果是发布模式（':app:assembleRelease'）则自增版本号，并且写回version.properties文件中
+    def runTasks = gradle.startParameter.taskNames
+    if (':app:assembleBluetoothDebugRelease' in runTasks) {
+        appName = 'SomkerBluetooth'
+        createProps.store(createapkPropsFile.newWriter(), null)
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == 'release') {
+            variant.outputs.all { output ->
+                outputFileName = appName + "_code_" + "${defaultConfig.versionCode}" + "_Name_" + "${defaultConfig.versionName}" + "_" + "${releaseTime()}" + "_${count}" +'.apk'
+            }
+        }
+    }
+
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'somker.pro.com.mybluetooth.greendao.gen'
+        targetGenDir 'src/main/java'
+    }
+
+}
+
+
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    //bitmap 取色
+    implementation 'com.android.support:palette-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //Android 工具类
+    implementation 'com.blankj:utilcode:1.26.0'
+    // 数据库
+    implementation 'org.greenrobot:greendao:3.2.2'
+    //数据库加密的
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
+    //沉浸式
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    /*图片加载框架*/
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    //Retrofit Gson转换器
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // rxandroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    //OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    //日志输出
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+}

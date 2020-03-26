@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+
+    <somker.pro.com.mybluetooth.ui.customise.colorpicker.SmokerColorView
+        android:id="@+id/smokerColorView"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/px_300"
+        android:layout_height="@dimen/px_300"
+        android:background="#999999"
+        app:imgSrc="@mipmap/ic_img_color"
+        app:imgScaleType="fitXY"
+        app:indicator_h="@dimen/px_40"
+        app:indicator_w="@dimen/px_40"
+        app:indicatorSrc="@mipmap/ic_sel_color"/>
+
+    <TextView
+        android:id="@+id/mTvColor"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_60"
+        android:gravity="center"
+        android:text="取色结果"/>
+
+</LinearLayout>
